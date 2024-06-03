@@ -9,6 +9,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/index.css">
         <style>
             body {
                 font-family: 'Roboto', sans-serif;
@@ -417,7 +418,9 @@
                 ?>
             </div>
         </div>
-
+        <button class="basket" style="width: 10px; height:10px">
+        <input type="image" class="icon-basket" src="images/panier.png">
+        </button>
         <script>
             // Forum section - Add new topic
             document.querySelector('.forum-new-topic button').addEventListener('click', function() {
