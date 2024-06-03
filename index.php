@@ -288,7 +288,8 @@
                                         <div class="price">' . number_format($item['price'], 2, '.', ''). ' €</div>
                                         <div class="caption">
                                             <h4>' . $item['name'] . '</h4>
-                                            <p>' . $item['description'] . '</p>
+                                            <h4>' . $item['description'] . '</h4>
+                                            
                                             <a href="#" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</a>
                                         </div>
                                     </div>
@@ -418,9 +419,9 @@
                 ?>
             </div>
         </div>
-        <button class="basket" style="width: 10px; height:10px">
-        <input type="image" class="icon-basket" src="images/panier.png">
-        </button>
+
+
+        
         <script>
             // Forum section - Add new topic
             document.querySelector('.forum-new-topic button').addEventListener('click', function() {
@@ -468,5 +469,8 @@
                 }
             });
         </script>
+        <button class="basket" style="width: 10px; height:10px">
+        <input type="image" class="icon-basket" src="images/panier.png">
+        </button>
     </body>
 </html>
