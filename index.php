@@ -469,8 +469,5 @@
                 }
             });
         </script>
-        <button class="basket" style="width: 10px; height:10px">
-        <input type="image" class="icon-basket" src="images/panier.png">
-        </button>
     </body>
 </html>

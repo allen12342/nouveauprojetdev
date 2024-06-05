@@ -287,15 +287,15 @@
                                         <img src="images/' . $item['image'] . '" alt="...">
                                         <div class="price">' . number_format($item['price'], 2, '.', ''). ' €</div>
                                         <div class="caption">
-                                            <h4>' . $item['name'] . '</h4> 
+                                            <h4>' . $item['name'] . '</h4>
                                             <p>' . $item['description'] . '</p>
-                                            <a href="#" class="btn btn-order" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</a>
+                                            <button class="btn btn-order btn-primary" data-product="' . $item['name'] . '" data-price="' . number_format($item['price'], 2, '.', '') . '"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</button>
                                         </div>
                                     </div>
                                 </div>';
                         }
-                       
-                       echo    '</div>
+                        
+                        echo '</div>
                             </div>';
                     }
 
@@ -418,9 +418,72 @@
                 ?>
             </div>
         </div>
-        <button class="basket" style="width: 10px; height:10px">
-        <input type="image" class="icon-basket" src="images/panier.png">
-        </button>
+        <style>
+            .bmenu {
+                text-align: center;
+                float: right;
+                right: 10px;
+                top: 50px;
+                width: 300px;
+                background-color: white;
+                border: 1px solid #ccc;
+                padding: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+                }
+            .baffiche {
+                display: inline-block;
+                position: sticky;
+                left: 80%;
+                bottom: 21%;
+            }
+            .baskettotal{
+                color: black;
+            }
+        </style>
+        <div class="baffiche">
+            <div id="basketMenu" class="bmenu">
+                <h4>Your Basket</h4>
+                <ul id="basketItems"></ul>
+                <p class="baskettotal">Total: <span id="basketTotal">0.00</span> €</p>
+                <button id="checkoutButton" class="btn btn-success">Checkout</button>
+            </div>
+        </div>
+            <button class="basket" style="width: 10px; height: 10px">
+                <input type="image" class="icon-basket" src="images/panier.png">
+            </button>
+        <script>
+        document.querySelector('.basket').addEventListener('click', function() {
+            var basketMenu = document.getElementById('basketMenu');
+            basketMenu.style.display = basketMenu.style.display === 'none' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.btn-order').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var product = button.getAttribute('data-product');
+                var price = button.getAttribute('data-price');
+                var basketItems = document.getElementById('basketItems');
+                var listItem = document.createElement('li');
+                listItem.className = 'basket-item';
+                listItem.innerHTML = `${product} - ${price} € <button class="remove-item btn btn-danger btn-sm">Remove</button>`;
+                basketItems.appendChild(listItem);
+                updateBasketTotal();
+            });
+        });
+        function updateBasketTotal() {
+            var total = 0;
+            document.querySelectorAll('.basket-item').forEach(function(item) {
+                var itemPrice = parseFloat(item.innerHTML.split(' - ')[1].replace(' € <button class="remove-item btn btn-danger btn-sm">Remove</button>', ''));
+                total += itemPrice;
+            });
+            document.getElementById('basketTotal').innerText = total.toFixed(2);
+        }
+        document.getElementById('basketItems').addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-item')) {
+                event.target.closest('li').remove();
+                updateBasketTotal();
+            }
+        });
+        </script>
         <script>
             // Forum section - Add new topic
             document.querySelector('.forum-new-topic button').addEventListener('click', function() {
@@ -468,6 +531,5 @@
                 }
             });
         </script>
-        
     </body>
 </html>
