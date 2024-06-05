@@ -289,6 +289,7 @@
                                         <div class="caption">
                                             <h4>' . $item['name'] . '</h4>
                                             <p>' . $item['description'] . '</p>
+                                            <a href="/Update.php?id=' . $item['id'] . '" class="btn btn-info" role="button">Voir en détails</a>
                                             <button class="btn btn-order btn-primary" data-product="' . $item['name'] . '" data-price="' . number_format($item['price'], 2, '.', '') . '"><span class="glyphicon glyphicon-shopping-cart"></span> Commander</button>
                                         </div>
                                     </div>
