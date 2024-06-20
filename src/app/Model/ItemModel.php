@@ -61,7 +61,7 @@ class ItemModel
         //A faire
     }
 
-    public function getAllItem($id)
+    public function getAllItem()
     {
         //A faire
     }
