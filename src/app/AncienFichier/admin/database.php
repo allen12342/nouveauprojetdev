@@ -5,7 +5,7 @@ class Database
     private static $dbHost = "localhost";
     private static $dbName = "chaussure";
     private static $dbUsername = "root";
-    private static $dbUserpassword = "1234";
+    private static $dbUserpassword = "";
     
     private static $connection = null;
     
@@ -15,7 +15,7 @@ class Database
         {
             try
             {
-              self::$connection = new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName , self::$dbUsername, self::$dbUserpassword);
+                self::$connection = new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName , self::$dbUsername, self::$dbUserpassword);
             }
             catch(PDOException $e)
             {

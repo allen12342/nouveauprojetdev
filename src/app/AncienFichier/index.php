@@ -477,38 +477,53 @@
                     <input type="image" class="icon-basket" src="images/panier.png">
                 </button>
             <script>
+            
             document.querySelector('.basket').addEventListener('click', function() {
-                var basketMenu = document.getElementById('basketMenu');
-                basketMenu.style.display = basketMenu.style.display === 'none' ? 'block' : 'none';
+            var basketMenu = document.getElementById('basketMenu');
+            basketMenu.style.display = basketMenu.style.display === 'none' ? 'block' : 'none';
             });
-            document.querySelectorAll('.btn-order').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var product = button.getAttribute('data-product');
-                    var price = button.getAttribute('data-price');
-                    var basketItems = document.getElementById('basketItems');
-                    var listItem = document.createElement('li');
-                    listItem.className = 'basket-item';
-                    listItem.innerHTML = `${product} - ${price} € <button class="remove-item btn btn-danger btn-sm">Remove</button>`;
-                    basketItems.appendChild(listItem);
-                    updateBasketTotal();
-                });
+
+        document.querySelectorAll('.btn-order').forEach(function(button) {
+            button.addEventListener('click', function() {
+            var product = button.getAttribute('data-product');
+            var price = button.getAttribute('data-price');
+            var basketItems = document.getElementById('basketItems');
+            var listItem = document.createElement('li');
+            listItem.className = 'basket-item';
+            listItem.innerHTML = `${product} - ${price} € <button class="remove-item btn btn-danger btn-sm">Remove</button>`;
+            basketItems.appendChild(listItem);
+            updateBasketTotal();
             });
-            function updateBasketTotal() {
-                var total = 0;
-                document.querySelectorAll('.basket-item').forEach(function(item) {
-                    var itemPrice = parseFloat(item.innerHTML.split(' - ')[1].replace(' € <button class="remove-item btn btn-danger btn-sm">Remove</button>', ''));
-                    total += itemPrice;
-                });
-                document.getElementById('basketTotal').innerText = total.toFixed(2);
+        });
+
+        function updateBasketTotal() {
+            var total = 0;
+            document.querySelectorAll('.basket-item').forEach(function(item) {
+                var itemPrice = parseFloat(item.innerHTML.split(' - ')[1].replace(' € <button class="remove-item btn btn-danger btn-sm">Remove</button>', ''));
+                total += itemPrice;
+            });
+            document.getElementById('basketTotal').innerText = total.toFixed(2);
+        }
+
+        document.getElementById('basketItems').addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-item')) {
+                event.target.closest('li').remove();
+                updateBasketTotal();
             }
-            document.getElementById('basketItems').addEventListener('click', function(event) {
-                if (event.target.classList.contains('remove-item')) {
-                    event.target.closest('li').remove();
-                    updateBasketTotal();
-                }
+        });
+
+        document.getElementById('checkoutButton').addEventListener('click', function() {
+            var orderItems = [];
+            document.querySelectorAll('.basket-item').forEach(function(item) {
+                var productDetails = item.innerHTML.split(' - ');
+                var product = productDetails[0];
+                var price = productDetails[1].replace(' € <button class="remove-item btn btn-danger btn-sm">Remove</button>', '');
+                orderItems.push({ product: product, price: price });
             });
-            </script>
-            <script>
+            localStorage.setItem('orderItems', JSON.stringify(orderItems));
+                    window.location.href = 'checkout.php';
+                });
+            
                 // Forum section - Add new topic
                 document.querySelector('.forum-new-topic button').addEventListener('click', function() {
                     var topicContent = document.querySelector('.forum-new-topic textarea').value;

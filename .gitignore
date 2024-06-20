@@ -1,0 +1,5 @@
+# .env unique a chacun
+src/.env
+
+# fichiers et dossiers composer
+src/vendor/
